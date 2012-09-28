@@ -1,0 +1,11 @@
+@verifikationsnummer 0N189
+@verifikationsdatum 2012-03-08
+@bokföringsdatum 2012-04-79
+@sakattest KC
+@ekonomiskattest PF
+@konto1 k1944 56 5 5040
+@konto2 d2894 12323
+@konto3 
+@konto4 
+@konto5 
+@beskrivning Hej, det här är ett verifikat till dig.@Från mig

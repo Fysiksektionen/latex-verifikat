@@ -8,20 +8,19 @@ import time
 ##################################
 #Öppnar en fil där man kan läsa in betydelsen av kontonummer
 kontofil = open("AutoVerifikatKonton.txt", "r")
-#Skapar en hemagjord "2-delad dictionary"
-kontnummer=[]
-kontnamn=[]
+#Jobbar med en Python-doctionary (hashning)
+konton={}
 for rad in kontofil.readlines():
 	komponenter=rad.split(";")
-	kontnummer.append(komponenter[0])
-	kontnamn.append(komponenter[1].strip())
+	#kontnummer.append(komponenter[0])
+	konton[komponenter[0]]=komponenter[1].strip()
 
-#En funktion som kollar om kontonummret finns och i så fall returnerar rätt konto-namn (linjär sökning)
+#En funktion som kollar om kontonummret finns och i så fall returnerar rätt konto-namn
 def kontonamn(knummer):
-	for i in range(0,len(kontnummer)):
-		if (knummer == kontnummer[i]):
-			return kontnamn[i]
-	return ""
+	if(knummer in konton):
+		return konton[knummer]
+	else:
+		return ""
  
  
  
@@ -95,24 +94,20 @@ def kontcalc(kontoinf):
 ##################################
 #Öppnar en fil där man kan läsa in betydelsen av namnförkortningar
 namnfil = open("AutoVerifikatNamn.txt", "r")
-#Skapar en hemagjord "3-delad dictionary"
-kortnamn=[]
-fullnamn=[]
-titel=[]
+#Jobbar med en Python-doctionary (hashning)
+personer={}
 for rad in namnfil.readlines():
 	komponenter=rad.split(";")
-	kortnamn.append(komponenter[0].upper()) #Upper case för att göra case-okänslig
-	fullnamn.append(komponenter[1])
-	titel.append(komponenter[2].strip())
+	personer[komponenter[0].upper()]=[komponenter[1], komponenter[2].strip()] #Upper case för att göra case-okänslig
 
 #En funktion som kollar om förkortningen finns och i så fall returnerar rätt namn och titel
 def person(forkortning):
 	#Gör upper case för att göra case-okänslig
 	forkortning=forkortning.upper()
-	for i in range(0,len(kortnamn)):
-		if (forkortning == kortnamn[i]):
-			return [fullnamn[i], titel[i]]
-	return ["Signatur", "Namnförtydligande och titel"]
+	if(forkortning in personer):
+		return personer[forkortning]
+	else:
+		return ["Signatur", "Namnförtydligande och titel"]
 	
 ##################################
 # Fixa med specifikationstexten  #
